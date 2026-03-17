@@ -47,7 +47,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
         <div className="max-w-3xl">
 
           {/* Eyebrow */}
@@ -134,7 +134,7 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-950 to-transparent z-10" />
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce">
         <span className="text-slate-600 text-[9px] tracking-[0.3em] uppercase font-bold"
           style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
           Scroll

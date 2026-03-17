@@ -1,16 +1,6 @@
-import { useState } from "react";
-import { ShoppingCart, Star, Plus, Check, Heart } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
 
-export default function ProductCard({ product, onAddToCart }) {
-  const [added, setAdded] = useState(false);
-  const [wished, setWished] = useState(false);
-
-  const handleAddToCart = () => {
-    onAddToCart(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1800);
-  };
-
+export default function ProductCard({ product }) {
   const renderStars = (rating) =>
     Array.from({ length: 5 }, (_, i) => (
       <Star
@@ -45,19 +35,6 @@ export default function ProductCard({ product, onAddToCart }) {
             {product.category}
           </span>
         </div>
-
-        {/* Wishlist button */}
-        <button
-          onClick={() => setWished(!wished)}
-          className={`absolute top-3 right-3 p-1.5 border transition-all duration-200 ${
-            wished
-              ? "bg-orange-500/20 border-orange-500 text-orange-400"
-              : "bg-slate-950/60 border-slate-700 text-slate-500 opacity-0 group-hover:opacity-100"
-          }`}
-          aria-label="Agregar a favoritos"
-        >
-          <Heart className={`w-3.5 h-3.5 ${wished ? "fill-orange-400" : ""}`} />
-        </button>
 
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -100,40 +77,20 @@ export default function ProductCard({ product, onAddToCart }) {
 
         {/* Bottom: Price + CTA */}
         <div className="flex items-center justify-between gap-3 mt-auto pt-3 border-t border-slate-800">
-
-          {/* Price */}
-          <div>
-            <span
-              className="text-white font-black text-xl"
-              style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-            >
-              ${product.price.toLocaleString("es-AR")}
-            </span>
-          </div>
-
-          {/* Add to cart */}
-          <button
-            onClick={handleAddToCart}
-            className={`flex items-center gap-2 font-black tracking-[0.08em] uppercase text-xs px-4 py-2.5 transition-all duration-200 ${
-              added
-                ? "bg-green-600/20 border border-green-500/50 text-green-400"
-                : "bg-orange-600 hover:bg-orange-500 text-white hover:shadow-[0_0_20px_rgba(249,115,22,0.35)]"
-            }`}
+          <span
+            className="text-white font-black text-xl"
             style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-            disabled={added}
           >
-            {added ? (
-              <>
-                <Check className="w-3.5 h-3.5" />
-                <span>¡Listo!</span>
-              </>
-            ) : (
-              <>
-                <Plus className="w-3.5 h-3.5" />
-                <span>Añadir</span>
-              </>
-            )}
-          </button>
+            ${product.price.toLocaleString("es-AR")}
+          </span>
+          <a
+            href="#contacto"
+            className="flex items-center gap-1.5 text-orange-500 hover:text-orange-400 font-black tracking-[0.1em] uppercase text-xs transition-colors duration-200 group"
+            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+          >
+            Consultar
+            <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+          </a>
         </div>
       </div>
 

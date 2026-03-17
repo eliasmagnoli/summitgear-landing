@@ -1,41 +1,21 @@
-import { useState, useMemo } from "react";
-import Navbar from "./components/Navbar";
+import { useState, useMemo } from "react";import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ProductCard from "./components/ProductCard";
 import products from "./data/products";
+import Sponsors from "./components/Sponsors";
 import { SlidersHorizontal, Mountain } from "lucide-react";
 
-// Available categories derived from products
 const ALL = "Todos";
 
 export default function App() {
-  const [cart, setCart] = useState([]);
   const [activeCategory, setActiveCategory] = useState(ALL);
   const [sortBy, setSortBy] = useState("default");
 
-  // Cart total items count
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  // Add product to cart (accumulates quantity)
-  const addToCart = (product) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prev, { ...product, quantity: 1 }];
-    });
-  };
-
-  // Unique categories from products
   const categories = useMemo(() => {
     const cats = [...new Set(products.map((p) => p.category))];
     return [ALL, ...cats];
   }, []);
 
-  // Filtered + sorted products
   const filteredProducts = useMemo(() => {
     let list =
       activeCategory === ALL
@@ -51,14 +31,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950">
-      {/* Google Fonts - Barlow Condensed */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap"
-        rel="stylesheet"
-      />
+      {/* ✅ Google Fonts ya está cargado en index.html — no repetir <link> acá */}
 
-      <Navbar cartCount={cartCount} />
+      <Navbar />
       <Hero />
+      <Sponsors />
 
       {/* Products Section */}
       <section id="productos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -81,7 +58,10 @@ export default function App() {
             >
               Nuestro Gear
             </h2>
-            <p className="text-slate-500 text-sm mt-2" style={{ fontFamily: "'Barlow', sans-serif" }}>
+            <p
+              className="text-slate-500 text-sm mt-2"
+              style={{ fontFamily: "'Barlow', sans-serif" }}
+            >
               {filteredProducts.length} productos disponibles
             </p>
           </div>
@@ -128,15 +108,16 @@ export default function App() {
               <ProductCard
                 key={product.id}
                 product={product}
-                onAddToCart={addToCart}
               />
             ))}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <Mountain className="w-12 h-12 text-slate-700 mb-4" strokeWidth={1} />
-            <p className="text-slate-500 font-bold tracking-widest uppercase text-sm"
-              style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+            <p
+              className="text-slate-500 font-bold tracking-widest uppercase text-sm"
+              style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+            >
               No hay productos en esta categoría
             </p>
           </div>
@@ -155,8 +136,16 @@ export default function App() {
               Summit Gear Co. — {new Date().getFullYear()}
             </span>
           </div>
-          <p className="text-slate-700 text-xs tracking-wider uppercase font-bold"
-            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+          <p
+            className="text-slate-700 text-xs tracking-wider uppercase font-bold"
+            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+          >
+            Page made by: ALEM Studio.
+          </p>
+          <p
+            className="text-slate-700 text-xs tracking-wider uppercase font-bold"
+            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+          >
             Equipo técnico para alta montaña
           </p>
         </div>

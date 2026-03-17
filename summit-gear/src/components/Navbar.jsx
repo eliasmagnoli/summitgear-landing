@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { ShoppingCart, Mountain, Search, Menu, X, ChevronRight } from "lucide-react";
+import { Mountain, Search, Menu, X, ChevronRight } from "lucide-react";
 
-export default function Navbar({ cartCount = 0 }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -80,24 +80,6 @@ export default function Navbar({ cartCount = 0 }) {
               >
                 <Search className="w-5 h-5" />
               </button>
-
-              {/* Cart */}
-              <a
-                href="#"
-                className="relative flex items-center gap-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-orange-500/50 px-3 py-2 rounded transition-all duration-200 group"
-              >
-                <ShoppingCart className="w-5 h-5 text-slate-300 group-hover:text-orange-400 transition-colors" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-orange-500 text-slate-950 text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full animate-bounce-once">
-                    {cartCount}
-                  </span>
-                )}
-                <span className="hidden sm:block text-slate-300 group-hover:text-white text-sm font-bold tracking-wider transition-colors"
-                  style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-                >
-                  {cartCount > 0 ? `${cartCount} ítem${cartCount > 1 ? "s" : ""}` : "Carrito"}
-                </span>
-              </a>
 
               {/* Mobile menu toggle */}
               <button
